@@ -1,0 +1,129 @@
+{% load mptt_tags %}
+{% load static %}
+<ul class="comment-list list-unstyled">
+    {% for comment in comment_list %}
+    <div class="row">
+        <div class={% if comment.reply_to %}"col-11 ml-auto " style="background-color:rgba(255,255,255,0.1); "{% else %}"col-12"{% endif %}>
+            <p>
+                {% if comment.reply_to %}
+                    {% if comment.reply_to.profile.img %}
+                    <img class="rounded" alt="Cinque Terre" src="{{ comment.user.profile.img.url }}" height="50" width="50" >
+                    {% endif %}
+                    <strong style="color:#FFDEAD">
+                        {{ comment.reply_to }}
+                    </strong>
+                    <i class="fas fa-reply-all" style="color: #F0FFFF"></i>
+                {% endif %}
+                {% if comment.user.profile.img %}
+                    <img class="rounded" alt="Cinque Terre" src="{{ comment.user.profile.img.url }}" height="50" width="50" >
+                {% endif %}
+                <strong style="color:#E0FFFF">
+                    {{ comment.user }}
+                </strong>
+            </p>
+            <div style="color: #F0FFFF">{{ comment.text|safe }}</div>
+            <div style="color: #F0FFFF;display: inline-block">
+                {{ comment.created_time }}
+            </div>
+            <button class="btn byn-default" id="r{{comment.id}}" style="display:none;color:#E0FFFF"
+                onclick="document.getElementById('b{{comment.id}}').style.display='';
+                document.getElementById('f{{comment.id}}').style.display='none';
+                document.getElementById('r{{comment.id}}').style.display='none';">
+                <i class="fas fa-undo" style="font-size:30px"></i></button>
+            {% if user.is_authenticated %}
+            <form action="{% url 'comments:comment_reply' post.pk comment.id %}" id="f{{comment.id}}" method="post"
+                class="comment-form" style="display:none">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="wmd-wrapper" id="id_text-wmd-wrapper_reply{{comment.id}}">
+                            <textarea cols="40" id="id_text{{comment.id}}" name="text" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-1 ml-auto" >
+                    <button class="btn btn-default float-right"   style="color: #E0FFFF;"
+                        onclick="document.getElementById('b{{comment.id}}').style.display='';
+                        document.getElementById('f{{comment.id}}').style.display='none';
+                        document.getElementById('r{{comment.id}}').style.display='none';">
+                        <i class="fas fa-comment-dots"style="font-size:30px"></i></button>
+                    </div>
+                </div>
+            </form>
+            <button class="btn btn-default" id="b{{comment.id}}" style="color: #F0FFFF "
+                onclick="document.getElementById('b{{comment.id}}').style.display='none';
+                document.getElementById('f{{comment.id}}').style.display='';
+                document.getElementById('r{{comment.id}}').style.display='';
+                editormd('id_text-wmd-wrapper_reply{{comment.id}}', {
+                    watch: false, // 关闭实时预览
+                    lineNumbers: false,
+                    lineWrapping: false,
+                    width: '100%',
+                    height: 250,
+                    placeholder: '在此输入评论',
+                    // 当有多个mdeditor时，全屏后，其他mdeditor仍然显示，解决此问题。
+                    onfullscreen: function () {
+                        this.editor.css('border-radius', 0).css('z-index', 9999);
+                    },
+                    onfullscreenExit: function () {
+                        this.editor.css({
+                            zIndex: 10,
+                            border: '1px solid rgb(221,221,221)'
+                        })
+                    },
+                    syncScrolling: 'single',
+                    path: '/static/mdeditor/js/lib/',
+                    // theme
+                    theme: 'dark',
+                    previewTheme: 'dark',
+                    editorTheme: 'lesser-dark',
+
+                    saveHTMLToTextarea: true, // editor.md 有问题没有测试成功
+                    toolbarAutoFixed: true,
+                    searchReplace: true,
+                    emoji: true,
+                    tex: true,
+                    taskList: false,
+                    flowChart: true,
+                    sequenceDiagram: true,
+
+                    // image upload
+                    imageUpload: true,
+                    imageFormats: ['jpg', 'JPG', 'jpeg', 'JPEG', 'gif', 'GIF', 'png', 'PNG', 'bmp',
+                        'BMP',
+                        'webp', 'WEBP'
+                    ],
+                    imageUploadURL: '/mdeditor/uploads/',
+                    toolbarIcons: function () {
+                        return ['bold', 'del', 'italic', '|',
+                            'list-ul', 'list-ol', 'hr', '|',
+                            'link', 'reference-link', 'image','table',
+                            'emoji', 'html-entities', 'pagebreak', '|',
+                            'help', 'info', '||',
+                            'watch',
+                        ]
+                    },
+                    onload: function () {
+                        console.log('onload', this);
+                        //this.fullscreen();
+                        //this.unwatch();
+                        //this.watch().fullscreen();
+
+                        //this.setMarkdown('#PHP');
+                        //this.width('100%');
+                        //this.height(480);
+                        //this.resize('100%', 640);
+                    }
+                });"><i class="fas fa-paper-plane"style="font-size:30px"></i></button></button>
+            {% endif %}
+            {% if not comment.is_leaf_node %}
+            <div class="children">
+                {{ children }}
+            </div>
+            {% endif %}
+        </div>
+        <div class={% if comment.reply_to %}"col-11 ml-auto "{% else %}"col-12"{% endif %}>
+            <hr>
+        </div>
+    </div>
+    {% empty %} 暂无评论 {% endfor %}
+</ul>

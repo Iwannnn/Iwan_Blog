@@ -1,0 +1,68 @@
+{% extends 'base.html'%}
+{% load blog_extras%}
+{%block main %}
+<div class="card-text" style="overflow: hidden">
+                    <div class="row" style="text-align: center">
+                        <div class="col-12 mt-4 font-body"style="color:#FDF5E6;">
+                            <div>张耀文</div>
+                            <div>%u5F20%u8000%u6587</div>
+                            <div>D5C5D2ABCEC4</div>
+                            <div>\u5F20\u8000\u658</div>
+                            <code class="hljs nginx"><span class="err">Hello World</span></code>
+                            <div>穷苦大学生，极度担忧头发</div>
+                            <div>温州人，浙江理工大学</div>
+                            <div>偏爱拖鞋背心</div>
+                            <div>不抽烟，不喝酒，常常熬夜</div>
+                            <div>不想开飞机的文科生不是一个优秀的计科学生</div>
+                            <div>奔三的死宅</div>
+                            <div>"ONE PIECE！是真实存在的！"</div>
+                            <div>"这都只是你自己在钻牛角尖而已"</div>
+                            <div>"该活着的应该是具有生存意志的人"</div>
+                            <div>哈哈哈哈哈哈哈哈哈哈</div>
+                            <del>如果你愿意请我喝一杯咖啡</del>
+                            <br><br><br>
+                            <h2 style="display:inline-block">
+                                <a href="https://github.com/Iwannnn">
+                                    <i class="fab fa-github"style="color:#FDF5E6;"></i>
+                                </a>
+                            </h2>
+                            &nbsp;&nbsp;&nbsp;
+                            <h2 style="display:inline-block">
+                                <a href="javascript:void(0);" class="no-underline" data-toggle="modal" data-target="#QQ">
+                                    <i class="fab fa-qq"style="color:#FDF5E6;"></i>
+                                </a>
+                            </h2>
+                            &nbsp;&nbsp;&nbsp;
+                            <h2 style="display:inline-block">
+                                <a href="javascript:void(0);" class="no-underline" data-toggle="modal" data-target="#WeChat">
+                                    <i class="fab fa-weixin"style="color:#FDF5E6;"></i>
+                                </a>
+                            </h2>
+                            &nbsp;&nbsp;&nbsp;
+                            <h2 style="display:inline-block">
+                                <a  href="javascript:void(0);" class="no-underline" data-toggle="modal" data-target="#Coffee">
+                                    <i class="fas fa-coffee"style="color:#FDF5E6;"></i>
+                                </a>
+                            </h2>    
+                            &nbsp;&nbsp;&nbsp;
+                            <h2 style="display:inline-block">
+                                <a href="{% url 'rss' %}">
+                                    <i class="fas fa-rss"style="color:#FDF5E6;"></i>
+                                </a>       
+                            </h2>  
+                        </div>                     
+                    </div>
+                </div>
+{%endblock main %}
+{% block toc %}
+{%show_recent_posts%}
+{%show_archives%}
+{%show_categories%}
+{%show_tags%}
+{% endblock toc %}
+{% block toc_hidden %}
+{%show_recent_posts%}
+{%show_archives%}
+{%show_categories%}
+{%show_tags%}
+{% endblock toc_hidden %}

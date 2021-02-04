@@ -1,0 +1,644 @@
+{%load static%}
+{% load blog_extras %}
+{% load notifications_tags %}
+{% notifications_unread as unread_count %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Iwan Blog</title>
+    <!-- style -->
+    <style>
+        .codehilite {
+        padding: 0;
+        }
+
+        /* for block of numbers */
+        .hljs-ln-numbers {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        text-align: center;
+        color: #ccc;
+        border-right: 1px solid #CCC;
+        vertical-align: top;
+        padding-right: 5px;
+        }
+
+        .hljs-ln-n {
+        width: 30px;
+        }
+        .hljs{
+            opacity:0.6;
+        }
+        /* for block of code */
+        .hljs-ln .hljs-ln-code {
+        padding-left: 10px;
+        white-space: pre;
+        }
+            #back_top {
+            display: block;
+            width: 40px;
+            height: 40px;
+            position: fixed;
+            bottom: 60px;
+            right: 40px;
+            border-radius: 10px 10px 10px 10px;
+            text-decoration: none;
+            display: none;
+            background-color: #FFFFF0;
+        }
+
+        #back_top span {
+            display: block;
+            width: 40px;
+            color: #696969;
+            font-size: 30px;
+            text-align: center;
+            margin-top: -3px;
+        }
+
+        #back_top span:hover {
+            color: #cccccc;
+        }
+        .sidebar{
+            will-change: min-height;
+        }
+
+        .sidebar__inner{
+            transform: translate(0, 0); /* For browsers don't support translate3d. */
+            transform: translate3d(0, 0, 0);
+            will-change: position, transform;
+        }  
+        .wmd-wrapper ul {
+            margin-left: 0px !important;
+        }
+
+        .wmd-wrapper ul li {
+            list-style: disc !important;
+        }
+
+        .wmd-wrapper ul ul li {
+            list-style: circle !important;
+        }
+
+        .wmd-wrapper h1,
+        .wmd-wrapper h2,
+        .wmd-wrapper h3,
+        .wmd-wrapper h4,
+        .wmd-wrapper h5,
+        .wmd-wrapper h6 {
+            background: #ffffff !important;
+            color: #000000 !important;
+        }
+
+        .wmd-wrapper h2,
+        .wmd-wrapper h3,
+        .wmd-wrapper h4 {
+            padding: 0px !important;
+        }
+
+        .wmd-wrapper h5 {
+            letter-spacing: 0px !important;
+            text-transform: none !important;
+            font-size: 1em !important;
+        }
+
+        .wmd-wrapper h6 {
+            font-size: 1em !important;
+            color: #777 !important;
+        }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        #wrapper {
+            min-height: 100%;
+            margin-bottom: -60px;
+        }
+
+        #footer,
+        #push {
+            height: 60px;
+        }
+
+        #bg_black{
+            position:fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            min-width: 1000px;
+            z-index:-10;
+            zoom: 1;
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-position: center 0;
+        }
+        #bg_asuka{
+            position:fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            min-width: 1000px;
+            z-index:-20;
+            zoom: 1;
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover; 
+            background-position: center 0;
+        }
+        ul li a{ color:#FFFFF0;}
+    </style>
+    <!-- meta -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- css -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/mdeditor/css/editormd.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/github.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.9.1/APlayer.min.css">
+    <link rel="stylesheet" href="{% static 'css/pace.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/button.min.css' %}" />
+    <!-- js -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/aplayer/1.9.1/APlayer.min.js"></script>
+    <script type="text/javascript" src="/static/mdeditor/js/editormd.js"></script>
+    <script src="{% static 'js/pace.min.js' %}"></script>
+    <script src="{% static 'js/modernizr.custom.js' %}"></script>
+    
+</head>
+<body>
+    <div id="bg_black" style="background:#000000;width:100%;height:100%;opacity:0.4;"></div>
+    <div id="bg_asuka" style="background-image: url({% static 'img/asuka.png'%});width:100%;height:100%;opacity:1.0;"></div>
+    <nav class="navbar navbar-expand-lg bg-dark"style="opacity:0.8;z-index:999">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'blog:index' %}" style="color: #D8BFD8;">Iwan Blog</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
+            aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fas fa-bars" style="font-size: xx-large;color:#FDF5E6;"></i>
+            </button>
+            <div class="collapse navbar-collapse " id="navbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blog:index' %}" style="color: #D8BFD8;">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'interface:about' %}" style="color: #D8BFD8;">关于</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'interface:admin' %}" style="color:#D8BFD8;">管理</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" 
+                            href="#" id="navbarDropdown" 
+                            style="color: #D8BFD8;" 
+                            role="button" 
+                            data-toggle="dropdown" 
+                            aria-haspopup="true" 
+                            aria-expanded="false"
+                        >
+                        {% if unread_count %}
+                            <svg viewBox="0 0 8 8"
+                                width="8px"
+                                height="8px">
+                                <circle cx="4"
+                                        cy="4"
+                                        r="4"
+                                        fill="#ff6b6b"
+                                        ></circle>
+                            </svg>
+                        {% endif %}
+                        {{user.username }}</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'notice:list'%}">通知{% if unread_count %}<span class="badge badge-danger">{{ unread_count }}</span>{% endif %}</a>                     
+                            <a class="dropdown-item" href="{% url "accounts:edit" user.id %}">信息</a>
+
+                            <a class="dropdown-item" href="{% url 'accounts:logout' %}">登出</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" 
+                            href="#" 
+                            style="color: #D8BFD8;" 
+                            role="button" 
+                            data-toggle="dropdown" 
+                            aria-haspopup="true" 
+                            aria-expanded="false">
+                        账号</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'accounts:login' %}">登录</a>
+                            <a class="dropdown-item" href="{% url 'accounts:register' %}">注册</a>
+                        </div>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <div id="header-search-box">
+                            <a id="search-menu" href="#"> 
+                                <span id="search-icon" class="ion-ios-search-strong" style="color:#D8BFD8"></span>
+                            </a>
+                            <div id="search-form" class="search-form">
+                                <form role="search" method="get" id="searchform" action="{% url 'blog:search' %}">
+                                    <input type="search" name="q" placeholder="Search" required>
+                                
+                                    <button type="submit"><span class="ion-ios-search-strong"></span></button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>    
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+    </div>
+    {% endfor %} {% endif %}
+    <div id="wrapper">
+        <div class="container">
+            <nav class="navbar navbar-light d-md-none">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hidden-side"
+                    aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-file-contract" style="font-size: xx-large;color:#FDF5E6;"></i>
+                </button>
+            </nav>
+            <div class="collapse" id="hidden-side"style="background-color:rgba(255,255,255,0); ">
+                <div class="ml-4 mr-4">
+                    <div class="card-body" style="padding: 20px 0 0 0; overflow: auto;">
+                            <!-- 目录 -->
+                        <div class="card-text" style="overflow: hidden">
+                            <br>
+                            {% if  user.is_authenticated %}
+                            <li style="color:#FFFFFF">
+                                <big>当前在线：{{ user.username }}</big>
+                            </li>
+                            {% endif %}
+                            <div id="aplayer_collapse"></div>
+                            <div style="color:#FFFFFF;">
+                            {% block toc_hidden %}
+                            {% endblock toc_hidden %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">      
+                <div class="col-xs-12 col-md-8">
+                    <main>
+                        {%block main %}
+                        {%endblock main%}
+                    </main>
+                </div>
+                <div class="col-md-4 card d-none d-md-block collapse sidebar"style="background-color:rgba(255,255,255,0); ">
+                    <div id="right_sidebar">
+                        <div class="sidebar__inner">
+                            <br>
+                            {% if  user.is_authenticated %}
+                            <li style="color:#FFFFFF">
+                                <big>当前在线：{{ user.username }}</big>
+                                <br>
+                            </li>
+                            {% endif %}
+                            <a href="#"><div id="aplayer"></div></a>
+                            <div style="color:#FFFFFF;">
+                            {% block toc %}
+                            {% endblock toc %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a id="back_top" href="script:;"><span><i class="fas fa-hand-middle-finger"></i></span></a>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+    <footer id ="footer" class='navbar-fixed-bottom bg-dark'style="opacity:0.7;">
+        <big><p class="copyright" style="color: pink">
+            <a href="https://github.com/Iwannnn">
+                <i class="fab fa-github"style="color:#D8BFD8;"></i>
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="javascript:void(0);" class="no-underline" data-toggle="modal"
+                data-target="#QQ">
+                <i class="fab fa-qq" style="color:#D8BFD8;"></i>
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="javascript:void(0);" class="no-underline" data-toggle="modal"
+                data-target="#WeChat">
+                <i class="fab fa-weixin" style="color:#D8BFD8;"></i>
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="javascript:void(0);" class="no-underline" data-toggle="modal"
+                data-target="#Coffee">
+                <i class="fas fa-coffee" style="color:#D8BFD8;"></i>
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="{% url 'rss' %}">
+                <i class="fas fa-rss" style="color:#D8BFD8;"></i>
+            </a>
+        </p></big>
+    </footer>
+    <div class="modal fade" id="QQ" tabindex="-1" role="dialog"
+        aria-labelledby="QQ" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="{% static 'img/QQ.jpg'%}"
+                        style="max-width: 100%"
+                        alt="img"
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="WeChat" tabindex="-1" role="dialog"
+        aria-labelledby="WeChat" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="{% static 'img/WeChat.jpg'%}"
+                        style="max-width: 100%"
+                        alt="img"
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="Coffee" tabindex="-1" role="dialog"
+        aria-labelledby="Coffee" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <img src="{% static 'img/Coffee.jpg'%}"
+                        style="max-width: 100%"
+                        alt="img"
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    var ap = new APlayer({
+        element: document.getElementById('aplayer'),
+        mini: false,
+        autoplay: false,
+        theme: '#FADFA3',
+        loop: 'all',
+        order: 'random',
+        preload: 'auto',
+        volume: 0.7,
+        mutex: true,
+        listFolded: false,
+        listMaxHeight: 90,
+        lrcType: 3,
+        audio:[
+            {
+                /*歌名*/
+                title: 'One Last Kiss',
+                /*作者*/
+                author: '宇多田光',
+                /*歌曲*/
+                url: "{% static 'bgm/宇多田光 (宇多田ヒカル) - One Last Kiss (试听版).mp3'%}",
+                /*音乐专辑图片*/
+                pic: "{% static 'img/rei.jpg'%}",
+                /*歌词*/
+                lrc: "{% static 'lrc/宇多田光 (宇多田ヒカル) - One Last Kiss (试听版).lrc'%}",
+            },
+
+        ]
+    });
+    </script>
+        <script>
+    var ap = new APlayer({
+        element: document.getElementById('aplayer_collapse'),
+        mini: false,
+        autoplay: false,
+        theme: '#FADFA3',
+        loop: 'all',
+        order: 'random',
+        preload: 'auto',
+        volume: 0.7,
+        mutex: true,
+        listFolded: false,
+        listMaxHeight: 90,
+        lrcType: 3,
+        audio:[
+            {
+                /*歌名*/
+                title: 'One Last Kiss',
+                /*作者*/
+                author: '宇多田光',
+                /*歌曲*/
+                url: "{% static 'bgm/宇多田光 (宇多田ヒカル) - One Last Kiss (试听版).mp3'%}",
+                /*音乐专辑图片*/
+                pic: "{% static 'img/rei.jpg'%}",
+                /*歌词*/
+                lrc: "{% static 'lrc/宇多田光 (宇多田ヒカル) - One Last Kiss (试听版).lrc'%}",
+            }
+        ]
+    });
+    </script>
+    <script>
+        $(function () {
+            for (var i = 0; i < 100; i++) {
+                $("#article").append("<p>xxxxxxxxxx<br></p>")
+            }
+
+        })
+    </script>
+    <script>
+        $(function () {
+            $(window).scroll(function () { //只要窗口滚动,就触发下面代码 
+                var scrollt = document.documentElement.scrollTop + document.body.scrollTop; //获取滚动后的高度 
+                if (scrollt > 200) { //判断滚动后高度超过200px,就显示  
+                    $("#back_top").fadeIn(400); //淡出     
+                } else {
+                    $("#back_top").stop().fadeOut(400); //如果返回或者没有超过,就淡入.必须加上stop()停止之前动画,否则会出现闪动   
+                }
+            });
+            $("#back_top").click(function () { //当点击标签的时候,使用animate在200毫秒的时间内,滚到顶部
+                $("html,body").animate({
+                    scrollTop: "0px"
+                }, 200);
+            });
+        });
+    </script>
+    <script src="{% static 'js/jquery.sticky-sidebar.min.js' %}"></script>
+    <script type="text/javascript">
+            $(() => {
+                $('#left_sidebar').stickySidebar({
+                    topSpacing: 0,
+                    bottomSpacing: 20,
+                });
+                $('#right_sidebar').stickySidebar({
+                    topSpacing: 0,
+                    bottomSpacing: 20,
+                });
+            });
+        
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            editormd("id_text-wmd-wrapper", {
+                watch: false, // 关闭实时预览
+                lineNumbers: false,
+                lineWrapping: false,
+                width: "100%",
+                height: 300,
+                placeholder: '在此输入评论',
+                // 当有多个mdeditor时，全屏后，其他mdeditor仍然显示，解决此问题。
+                onfullscreen: function () {
+                    this.editor.css("border-radius", 0).css("z-index", 9999);
+                },
+                onfullscreenExit: function () {
+                    this.editor.css({
+                        zIndex: 10,
+                        border: "1px solid rgb(221,221,221)"
+                    })
+                },
+                syncScrolling: "single",
+                path: "/static/mdeditor/js/lib/",
+                // theme
+                theme: "dark",
+                previewTheme: "dark",
+                editorTheme: "lesser-dark",
+
+                saveHTMLToTextarea: true, // editor.md 有问题没有测试成功
+                toolbarAutoFixed: true,
+                searchReplace: true,
+                emoji: true,
+                tex: true,
+                taskList: false,
+                flowChart: true,
+                sequenceDiagram: true,
+
+                // image upload
+                imageUpload: true,
+                imageFormats: ['jpg', 'JPG', 'jpeg', 'JPEG', 'gif', 'GIF', 'png', 'PNG', 'bmp',
+                    'BMP',
+                    'webp', 'WEBP'
+                ],
+                imageUploadURL: "/mdeditor/uploads/",
+                toolbarIcons: function () {
+                    return ['bold', 'del', 'italic', '|',
+                        'list-ul', 'list-ol', 'hr', '|',
+                        'link', 'reference-link', 'image','table',
+                        'emoji', 'html-entities', 'pagebreak', '|',
+                        'help', 'info', '||',
+                        'watch',
+                    ]
+                },
+                onload: function () {
+                    console.log('onload', this);
+                    //this.fullscreen();
+                    //this.unwatch();
+                    //this.watch().fullscreen();
+
+                    //this.setMarkdown("#PHP");
+                    //this.width("100%");
+                    //this.height(480);
+                    //this.resize("100%", 640);
+                }
+            });
+        });
+    </script>
+    <script src="{% static 'js/csrf.js' %}"></script>
+    <script>
+        // 点赞功能主函数
+        function validate_is_like(url, id, likes) {
+            // 取出 LocalStorage 中的数据
+            let storage = window.localStorage;
+            const storage_str_data = storage.getItem("my_post_data");
+            let storage_json_data = JSON.parse(storage_str_data);
+            // 若数据不存在，则创建空字典
+            if (!storage_json_data) {
+                storage_json_data = {}
+            };
+            // 检查当前文章是否已点赞。是则 status = true
+            const status = check_status(storage_json_data, id);
+            if (status) {
+                layer.msg('已经点过赞了哟~');
+                // 点过赞则立即退出函数
+                return;
+            } else {
+                // 用 Jquery 找到点赞数量，并 +1
+                $('span#likes_number').text(likes + 1).css('color', '#dc3545');
+            }
+            // 用 ajax 向后端发送 post 请求
+            $.post(
+                url,
+                // post 只是为了做 csrf 校验，因此数据为空
+                {},
+                function(result) {
+                    if (result === 'success') {
+                        // 尝试修改点赞数据
+                        try {
+                            storage_json_data[id] = true;
+                        } catch (e) {
+                            window.localStorage.clear();
+                        };
+                        // 将字典转换为字符串，以便存储到 LocalStorage
+                        const d = JSON.stringify(storage_json_data);
+                        // 尝试存储点赞数据到 LocalStorage
+                        try {
+                            storage.setItem("my_post_data", d);
+                        } catch (e) {
+                            // code 22 错误表示 LocalStorage 空间满了
+                            if (e.code === 22) {
+                                window.localStorage.clear();
+                                storage.setItem("my_post_data", d);
+                            }
+                        };
+                    } else {
+                        layer.msg("与服务器通信失败..过一会儿再试试呗~");
+                    }
+                }
+            );
+        };
+
+        // 辅助点赞主函数，验证点赞状态
+        function check_status(data, id) {
+            // 尝试查询点赞状态
+            try {
+                if (id in data && data[id]) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (e) {
+                window.localStorage.clear();
+                return false;
+            };
+        };
+    </script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+        hljs.initLineNumbersOnLoad();
+    </script>
+</body>
+</html>

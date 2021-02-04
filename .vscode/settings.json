@@ -1,0 +1,42 @@
+{
+    "python.pythonPath": "C:\\Users\\Zhang\\.virtualenvs\\Iwan_Blog-hrhBpL1Y\\Scripts\\python.exe",
+    "editor.formatOnSave": true,
+    "editor.fontSize": 14,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "update.mode": "none",
+    "search.followSymlinks": false,
+    "[javascript]": {
+        "editor.defaultFormatter": "HookyQR.beautify"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "HookyQR.beautify"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "beautify.config": "",
+    "beautify.language": {
+        "html": [
+            "htm",
+            "html",
+            "vue"
+        ],
+        "js": {
+            "type": [
+                "javascript",
+                "json"
+            ],
+            "filename": [
+                ".jshintrc",
+                ".jsbeautify"
+            ]
+        },
+        "css": [
+            "css",
+            "scss",
+            "less"
+        ]
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "HookyQR.beautify"
+    }
+}

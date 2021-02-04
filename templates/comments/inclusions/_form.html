@@ -1,0 +1,14 @@
+<form action="{% url 'comments:comment' post.pk  %}" method="post" class="comment-form">
+    <h3 style="color: #F0FFFF">发表评论</h3>
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-12">
+            <div class="wmd-wrapper" id="id_text-wmd-wrapper">
+                <textarea cols="40" id="id_text" name="text" rows="10" required=""></textarea>
+            </div>
+        </div>
+        <div class="col-1 ml-auto">
+            <button class="btn btn-default float-right"style="color: #F0FFFF"><i class="fas fa-comment-dots"style="font-size:30px"></i></button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,8 @@
+<h3 class="widget-title">标签</h3>
+<ul>
+    {% for tag in tag_list %}
+        <i class="fas fa-tags"style="color:#87CEEB">&nbsp;</i>
+        <a href="{%url 'blog:tag' tag.pk%}"style="color:#E0FFFF">{{ tag.name }}<span class="post-count">({{ tag.num_posts }})</span>
+        <br>
+    {% empty %} 暂无标签！ {% endfor %}
+</ul>

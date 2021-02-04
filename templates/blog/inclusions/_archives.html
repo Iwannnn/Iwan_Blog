@@ -1,0 +1,15 @@
+
+<h3 class="widget-title">归档</h3>
+<ul>
+    {% for date in date_list %}
+        {% comment %} 解析视图函数对应的url模式
+        第一个参数为端点值由冒号隔开第一部分为app_name
+        第二部分为path中参数的值 {%endcomment %}
+        <i class="fas fa-calendar-alt" style="color:#008B8B">&nbsp;</i>
+        <a href="{% url 'blog:archive' date.year date.month%}"style="color:#FFF0F5">
+            {{ date.year }} 年 {{ date.month }} 月
+        </a>
+        <br>
+    {% empty %} 暂无归档！ {% endfor %}
+</ul>
+

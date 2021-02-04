@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load comments_extras %}
+{% block main %}
+<article class="post post-{{ post.pk }}"style="background-color:rgba(255,255,255,0); ">
+    <header class="entry-header">
+        <h1 class="entry-title"style="color: #FFFAF0">{{ post.title }}</h1>
+        <div align="center"style="color: #F0FFFF">
+            <samll><small>
+            <span><a><time class="entry-date"><i class="fas fa-clock"style="color:#008B8B"></i>&nbsp;{{ post.created_time }}&nbsp;&nbsp;&nbsp;</time></a></span>
+            <span><a><i class="fas fa-feather-alt" style="color:#32CD32"></i>&nbsp;{{ post.author }}&nbsp;&nbsp;&nbsp;</a></span>
+            <span><a><i class="fas fa-eye"style="color:#D2691E" ></i>&nbsp;{{ post.views }}&nbsp;&nbsp;&nbsp;</a></span>
+            <span><a><i class="fas fa-thumbs-up" style="color:#FF0000"></i>&nbsp;{{ post.likes }}</a></span>
+            </small></small>
+        </div>
+    </header>
+    <div class="entry-content clearfix"style="color:#FFFAF0">
+        {{ post.body_html|safe }}
+    </div>
+    <div style="text-align:center;" class="mt-4">
+    <button class="btn btn-outline-danger"
+            type="button"
+            onclick="validate_is_like(
+                     '{% url 'blog:increase_likes' post.id %}',
+                     {{ post.id }},
+                     {{ post.likes }}
+                     )"
+            >
+        <span>点赞</span>
+        <span><i class="fas fa-hand-holding-heart"></i></span>
+        <span id="likes_number">{{ post.likes }}</span>
+    </button>
+</div>
+</article>
+<hr style="color:#FFFAF0">
+<section class="comment-area" id="comment-area"style="background-color:rgba(255,255,255,0); ">
+    {% if  user.is_authenticated %}
+        {% show_comment_form post %}
+        <hr>
+    {% else %} 
+    <div align="center">
+        <big><big><a href="{% url 'accounts:login' %}"class="float-left"style="color: #F0FFFF">登录</a>
+        <a href="{% url 'accounts:register' %}"class="float-right"style="color: #F0FFFF">注册</a></big></big>
+    </div>
+    <br>
+    {% endif %}
+    <div>
+    {% show_comments user post %}
+    </div>
+</section>
+{% endblock main %}
+
+{% block toc %}
+{% if post.toc %}
+<div class="widget widget-content"style="background-color:rgba(255,255,255,0); ">
+    <h3 class="widget-title" style="color: #FFFFF0">文章目录</h3>
+    <div class="toc">
+        <ul class="ul">
+            {{ post.toc|safe }}
+        <ul/>
+    </div>
+</div>
+{% endif %}
+{% endblock toc %}
+
+{% block toc_hidden %}
+{% if post.toc %}
+<div class="widget widget-content"style="background-color:rgba(255,255,255,0); ">
+    <h3 class="widget-title" style="color: #FFFFF0">文章目录</h3>
+    <div class="toc">
+        <ul class="ul">
+            {{ post.toc|safe }}
+        </>
+    </div>
+</div>
+{% endif %}
+{% endblock toc_hidden %}

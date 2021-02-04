@@ -1,0 +1,8 @@
+<h3 class="widget-title">最新文章</h3>
+<ul>
+    {% for post in recent_post_list%}
+        <i class="fas fa-file-alt" style="color:#DDA0DD">&nbsp;</i>
+        <a href="{{post.get_absolute_url}}"style="color:#E6E6FA">{{post.title}}</a>
+        <br>
+    {%empty%} 暂无文章！ {%endfor%}
+</ul>
