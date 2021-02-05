@@ -399,35 +399,66 @@
         </div>
     </div>
     <script>
-    var ap = new APlayer({
-        element: document.getElementById('aplayer'),
-        mini: false,
-        autoplay: false,
-        theme: '#FADFA3',
-        loop: 'all',
-        order: 'random',
-        preload: 'auto',
-        volume: 0.7,
-        mutex: true,
-        listFolded: false,
-        listMaxHeight: 90,
-        lrcType: 3,
-        audio:[
-            {
-                /*歌名*/
-                title: 'One Last Kiss',
-                /*作者*/
-                author: '宇多田光',
-                /*歌曲*/
-                url: "{% static 'bgm/宇多田光 (宇多田ヒカル) - One Last Kiss (试听版).mp3'%}",
-                /*音乐专辑图片*/
-                pic: "{% static 'img/rei.jpg'%}",
-                /*歌词*/
-                lrc: "{% static 'lrc/宇多田光 (宇多田ヒカル) - One Last Kiss (试听版).lrc'%}",
-            },
+        var ap = new APlayer({
+            element: document.getElementById('aplayer'),
+            mini: false,
+            autoplay: false,
+            theme: '#FADFA3',
+            loop: 'all',
+            order: 'random',
+            preload: 'auto',
+            volume: 0.7,
+            mutex: true,
+            listFolded: false,
+            listMaxHeight: 90,
+            lrcType: 3,
+            audio:[
+                {
+                    /*歌名*/
+                    title: 'One Last Kiss',
+                    /*作者*/
+                    author: '宇多田光',
+                    /*歌曲*/
+                    url: "{% static 'bgm/宇多田光 (宇多田ヒカル) - One Last Kiss (试听版).mp3'%}",
+                    /*音乐专辑图片*/
+                    pic: "{% static 'img/rei.jpg'%}",
+                    /*歌词*/
+                    lrc: "{% static 'lrc/宇多田光 (宇多田ヒカル) - One Last Kiss (试听版).lrc'%}",
+                },
 
-        ]
-    });
+            ]
+        });
+    </script>
+    <script>
+        var ap = new APlayer({
+            element: document.getElementById('aplayer_collapse:'),
+            mini: false,
+            autoplay: false,
+            theme: '#FADFA3',
+            loop: 'all',
+            order: 'random',
+            preload: 'auto',
+            volume: 0.7,
+            mutex: true,
+            listFolded: false,
+            listMaxHeight: 90,
+            lrcType: 3,
+            audio:[
+                {
+                    /*歌名*/
+                    title: 'One Last Kiss',
+                    /*作者*/
+                    author: '宇多田光',
+                    /*歌曲*/
+                    url: "{% static 'bgm/宇多田光 (宇多田ヒカル) - One Last Kiss (试听版).mp3'%}",
+                    /*音乐专辑图片*/
+                    pic: "{% static 'img/rei.jpg'%}",
+                    /*歌词*/
+                    lrc: "{% static 'lrc/宇多田光 (宇多田ヒカル) - One Last Kiss (试听版).lrc'%}",
+                },
+
+            ]
+        });
     </script>
     <script>
         var ap = new APlayer({
