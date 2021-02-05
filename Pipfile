@@ -58,6 +58,7 @@ Pygments = "*"
 gunicorn = "*"
 pipenv = "*"
 install = "*"
+supervisor = "*"
 
 [dev-packages]
 
