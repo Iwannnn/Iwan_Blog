@@ -25,7 +25,7 @@ SECRET_KEY = 'ab^!7+nsq*&ifoc$ozi5=z2ji=29ukgcgfjw=d+oqm(b5duxh0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', '.iwannnn.cn']
 
 
 # Application definition
@@ -145,3 +145,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
