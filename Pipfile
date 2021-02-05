@@ -12,8 +12,8 @@ click = "*"
 django = "*"
 django-appconf = "*"
 django-crispy-forms = "*"
-django-haystack = "*"aaa
-django-imagekit = "*"aaa
+django-haystack = "*"
+django-imagekit = "*"
 django-js-asset = "*"
 django-mdeditor = "*"
 django-model-utils = "*"
@@ -55,6 +55,7 @@ Markdown = "*"
 MarkupSafe = "*"
 Pillow = "*"
 Pygments = "*"
+gunicorn = "*"
 
 [dev-packages]
 
