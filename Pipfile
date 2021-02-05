@@ -1,5 +1,5 @@
 [[source]]
-url = "http://mirrors.aliyun.com/pypi/simple"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 verify_ssl = true
 name = "pypi"
 
@@ -12,8 +12,8 @@ click = "*"
 django = "*"
 django-appconf = "*"
 django-crispy-forms = "*"
-django-haystack = "*"aaa
-django-imagekit = "*"aaa
+django-haystack = "*"
+django-imagekit = "*"
 django-js-asset = "*"
 django-mdeditor = "*"
 django-model-utils = "*"
@@ -55,6 +55,9 @@ Markdown = "*"
 MarkupSafe = "*"
 Pillow = "*"
 Pygments = "*"
+gunicorn = "*"
+pipenv = "*"
+install = "*"
 
 [dev-packages]
 
