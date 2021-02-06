@@ -61,6 +61,7 @@ install = "*"
 supervisor = "*"
 
 [dev-packages]
+fabric = "*"
 
 [requires]
 python_version = "3.9"
