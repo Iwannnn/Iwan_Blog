@@ -1,7 +1,7 @@
 {% extends "base.html" %} 
 {%load blog_extras%}
 {% block main %}
-<div class="container">
+<div class="container"style="opacity:0.7;">
     <br>
     <div class="row">
         <div class="col-12 text-center">
@@ -32,7 +32,7 @@
                     <textarea type="text" class="form-control" id="bio" name="bio" rows="12">{{ user.profile.bio }}</textarea>
                 </div>
                 <!-- 提交按钮 -->
-                <button type="submit"><i class="fas fa-check" style="color:#E0FFFF"></i></button>
+                <button class="btn btn-default float-right"><i class="fas fa-check" style="color:#E0FFFF"></i></button>
             </form>
         </div>
     </div>
