@@ -2,9 +2,9 @@
 {%load blog_extras%}
 {% block main %}
 <div class="container" style="margin: 6% 20%;opacity:0.7;">
-    <civ class="row">
-        <div class="col-6"style="opacity:0.7;">
-            <form method="post" action="." enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-6">
+                <form method="post" action="." enctype="multipart/form-data">
                 {% csrf_token %}
                 <!-- phone -->
                 {% if user.profile.img %}
@@ -15,11 +15,11 @@
                 {% endif %}
                 <div class="form-group">
                     <label for="img">color:#E0FFFF ;上传头像</label>
-                    <input type="file" class="form-control-file " style="color:#E0FFFF" id="img" name="img">
+                    <input type="file" class="form-control-file " id="img" name="img">
                 </div>
                 <div class="form-group">
                     <label for="phone" style="color:#E0FFFF">电话</label>
-                    <input type="text" class="form-control" id="phone" name="phone" style="color:#E0FFFF" value="{{ user.profile.phone }} ">
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{ user.profile.phone }} ">
                 </div>
                 <!-- bio -->
                 <div class="form-group ">
