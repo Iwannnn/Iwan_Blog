@@ -3,3 +3,4 @@ db.sqlite3
 _credentials.py
 fabfile.py
 static
+media
