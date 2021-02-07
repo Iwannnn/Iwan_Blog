@@ -3,8 +3,7 @@
 {% block main %}
 <div class="container">
     <br>
-    <div class="row">
-        <div class="col-12 text-center"style="color:#E0FFFF ;opacity:0.7;">
+        <div class="text-center"style="color:#E0FFFF ;opacity:0.7;">
             <form method="post" action="." enctype="multipart/form-data">
                 {% csrf_token %}
                 <!-- phone -->
@@ -35,7 +34,6 @@
                 <button type="submit"><i class="fas fa-check" style="color:#E0FFFF"></i></button>
             </form>
         </div>
-    </div>    
 </div>
 {% endblock main %}
 {% block toc %}
