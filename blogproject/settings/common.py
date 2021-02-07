@@ -126,7 +126,7 @@ USE_TZ = True
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
