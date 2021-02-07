@@ -7,6 +7,3 @@ SECRET_KEY = 'development-secret-key'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
