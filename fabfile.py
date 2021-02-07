@@ -1,6 +1,6 @@
 from fabric import task
 from invoke import Responder
-from _credentials import github_username, github_password
+from _credentials import github_username, github_password, ssh_password
 
 
 def _get_github_auth_responders():
@@ -19,12 +19,26 @@ def _get_github_auth_responders():
     return [username_responder, password_responder]
 
 
+def _get_ssh_password():
+    """
+    返回 GitHub 用户名密码自动填充器
+    """
+    password_responder = Responder(
+        pattern="Enter login password for use with SSH auth:",
+        response='{}\n'.format(ssh_password)
+    )
+    return [password_responder]
+
+
 @task()
 def deploy(c):
     supervisor_conf_path = '~/etc/'
     supervisor_program_name = 'Iwan_Blog'
 
     project_root_path = '~/apps/Iwan_Blog/'
+
+    responders = _get_ssh_password()
+    c.run(responders)
     # 先停止应用
     with c.cd(supervisor_conf_path):
         cmd = 'supervisorctl stop {}'.format(supervisor_program_name)
