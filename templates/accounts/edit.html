@@ -8,14 +8,14 @@
                 {% csrf_token %}
                 <!-- phone -->
                 {% if user.profile.img %}
-                <div style="color:#E0FFFF">头像</div>
+                <div style="color:#E0FFFF" align="center">头像</div>
                 <img src="{{ user.profile.img.url }}" style="max-width: 40%; border-radius: 35%;">
                 {% else %}
                 <h5 class=" text-center"style="color:#E0FFFF">暂无头像</h5>
                 {% endif %}
                 <div class="form-group">
-                    <span><label for="img"style="color:#E0FFFF">上传头像</label></span>
-                    <span><input type="file" class="form-control-file" style="color:#E0FFFF" id="img" name="img"></span>
+                    <label for="img"style="color:#E0FFFF" align="left">上传头像</label>
+                    <input type="file" class="form-control-file" style="color:#E0FFFF" id="img" name="img" align="right">
                 </div>
                 <div class="form-group">
                     <label for="phone" style="color:#E0FFFF">电话</label>
@@ -31,7 +31,7 @@
                     <textarea type="text" class="form-control" id="bio" name="bio" rows="12">{{ user.profile.bio }}</textarea>
                 </div>
                 <!-- 提交按钮 -->
-                <button type="submit"><i class="fas fa-check" style="color:#E0FFFF;opacity:0.0;"></i></button>
+                <button class="btn btn-default float-right"><i class="fas fa-check" style="color:#E0FFFF"></i></button>
             </form>
         </div>
     </div>
