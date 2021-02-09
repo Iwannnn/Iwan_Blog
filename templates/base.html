@@ -532,6 +532,7 @@
     </script>
     <script type="text/javascript">
         $(function () {
+            
             editormd("id_text-wmd-wrapper", {
                 watch: false, // 关闭实时预览
                 lineNumbers: false,
@@ -539,6 +540,7 @@
                 width: "100%",
                 height: 300,
                 placeholder: '在此输入评论',
+                autoFocus : false,
                 // 当有多个mdeditor时，全屏后，其他mdeditor仍然显示，解决此问题。
                 onfullscreen: function () {
                     this.editor.css("border-radius", 0).css("z-index", 9999);
@@ -592,6 +594,7 @@
                     //this.height(480);
                     //this.resize("100%", 640);
                 }
+                
             });
         });
     </script>
