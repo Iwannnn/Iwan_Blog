@@ -4,3 +4,4 @@ _credentials.py
 fabfile.py
 static
 media
+.pyc
