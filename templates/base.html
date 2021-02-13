@@ -166,9 +166,9 @@
     <!-- css -->
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
-    <link rel="stylesheet" href="/static/mdeditor/css/editormd.min.css">
     <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.15.8/styles/github.min.css">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/aplayer/1.9.1/APlayer.min.css">
+    <link rel="stylesheet" href="/static/mdeditor/css/editormd.min.css">
     <link rel="stylesheet" href="{% static 'css/pace.css' %}" />
     <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
     <link rel="stylesheet" href="{% static 'css/button.min.css' %}" />
@@ -320,9 +320,40 @@
                             {% endif %}
                             <div id="aplayer"></div>
                             <div style="color:#FFFFFF;">
-                            {% block toc %}
-                            {% endblock toc %}
+                                {% block toc %}
+                                {% endblock toc %}
                             </div>
+                            <div align="center">
+                                <h2 style="display:inline-block">
+                                    <a href="https://github.com/Iwannnn">
+                                        <i class="fab fa-github"style="color:#FDF5E6;"></i>
+                                    </a>
+                                </h2>
+                                &nbsp;&nbsp;&nbsp;
+                                <h2 style="display:inline-block">
+                                    <a href="javascript:void(0);" class="no-underline" data-toggle="modal" data-target="#QQ">
+                                        <i class="fab fa-qq"style="color:#FDF5E6;"></i>
+                                    </a>
+                                </h2>
+                                &nbsp;&nbsp;&nbsp;
+                                <h2 style="display:inline-block">
+                                    <a href="javascript:void(0);" class="no-underline" data-toggle="modal" data-target="#WeChat">
+                                        <i class="fab fa-weixin"style="color:#FDF5E6;"></i>
+                                    </a>
+                                </h2>
+                                &nbsp;&nbsp;&nbsp;
+                                <h2 style="display:inline-block">
+                                    <a  href="javascript:void(0);" class="no-underline" data-toggle="modal" data-target="#Coffee">
+                                        <i class="fas fa-coffee"style="color:#FDF5E6;"></i>
+                                    </a>
+                                </h2>    
+                                &nbsp;&nbsp;&nbsp;
+                                <h2 style="display:inline-block">
+                                    <a href="{% url 'rss' %}">
+                                        <i class="fas fa-rss"style="color:#FDF5E6;"></i>
+                                    </a>       
+                                </h2>
+                            </div>  
                         </div>
                     </div>
                 </div>
@@ -334,30 +365,6 @@
         <div id="push"></div>
     </div>
     <footer id ="footer" class='navbar-fixed-bottom bg-dark'style="opacity:0.7;">
-        <big><p class="copyright" style="color: pink">
-            <a href="https://github.com/Iwannnn">
-                <i class="fab fa-github"style="color:#D8BFD8;"></i>
-            </a>
-            &nbsp;&nbsp;&nbsp;
-            <a href="javascript:void(0);" class="no-underline" data-toggle="modal"
-                data-target="#QQ">
-                <i class="fab fa-qq" style="color:#D8BFD8;"></i>
-            </a>
-            &nbsp;&nbsp;&nbsp;
-            <a href="javascript:void(0);" class="no-underline" data-toggle="modal"
-                data-target="#WeChat">
-                <i class="fab fa-weixin" style="color:#D8BFD8;"></i>
-            </a>
-            &nbsp;&nbsp;&nbsp;
-            <a href="javascript:void(0);" class="no-underline" data-toggle="modal"
-                data-target="#Coffee">
-                <i class="fas fa-coffee" style="color:#D8BFD8;"></i>
-            </a>
-            &nbsp;&nbsp;&nbsp;
-            <a href="{% url 'rss' %}">
-                <i class="fas fa-rss" style="color:#D8BFD8;"></i>
-            </a>
-        </p></big>
     </footer>
     <div class="modal fade" id="QQ" tabindex="-1" role="dialog"
         aria-labelledby="QQ" aria-hidden="true">
