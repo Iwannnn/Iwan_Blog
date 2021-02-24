@@ -7,7 +7,7 @@
             <p>
                 {% if comment.reply_to %}
                     {% if comment.reply_to.profile.img %}
-                    <img class="rounded" alt="Cinque Terre" src="{{ comment.user.profile.img.url }}" height="50" width="50" >
+                    <img class="rounded" alt="Cinque Terre" src="{{ comment.reply_to.profile.img.url }}" height="50" width="50" >
                     {% endif %}
                     <strong style="color:#FFDEAD">
                         {{ comment.reply_to }}
