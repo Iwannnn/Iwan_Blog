@@ -248,20 +248,6 @@
                         </div>
                     </li>
                     {% endif %}
-                    <li>
-                        <div id="header-search-box">
-                            <a id="search-menu" href="#"> 
-                                <span id="search-icon" class="ion-ios-search-strong" style="color:#D8BFD8"></span>
-                            </a>
-                            <div id="search-form" class="search-form">
-                                <form role="search" method="get" id="searchform" action="{% url 'blog:search' %}">
-                                    <input type="search" name="q" placeholder="Search" required>
-                                        <i class="fas fa-search"style="color:#D8BFD8"></i>
-                                    <button type="submit"><span class="ion-ios-search-strong"></span></button>
-                                </form>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -682,7 +668,6 @@
             };
         };
     </script>
-    <script src="{% static 'js/script.js' %}"></script>
     <script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>
     <script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
     <script>

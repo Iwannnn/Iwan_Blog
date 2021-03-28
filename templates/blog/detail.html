@@ -17,19 +17,19 @@
         {{ post.body_html|safe }}
     </div>
     <div style="text-align:center;" class="mt-4">
-    <button class="btn btn-outline-danger"
-            type="button"
-            onclick="validate_is_like(
-                     '{% url 'blog:increase_likes' post.id %}',
-                     {{ post.id }},
-                     {{ post.likes }}
-                     )"
-            >
-        <span>点赞</span>
-        <span><i class="fas fa-hand-holding-heart"></i></span>
-        <span id="likes_number">{{ post.likes }}</span>
-    </button>
-</div>
+        <button class="btn btn-outline-danger"
+                type="button"
+                onclick="validate_is_like(
+                        '{% url 'blog:increase_likes' post.id %}',
+                        {{ post.id }},
+                        {{ post.likes }}
+                        )"
+                >
+            <span>点赞</span>
+            <span><i class="fas fa-hand-holding-heart"></i></span>
+            <span id="likes_number">{{ post.likes }}</span>
+        </button>
+    </div>
 </article>
 <hr style="color:#FFFAF0">
 <section class="comment-area" id="comment-area"style="background-color:rgba(255,255,255,0); ">
