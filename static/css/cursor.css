@@ -1,0 +1,52 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+ 
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: azure;
+}
+ 
+ul {
+	position: relative;
+	display: flex;
+}
+ 
+ul li {
+	list-style: none;
+	margin: 0 30px;
+}
+ 
+ul li a {
+	position: relative;
+	display: inline-block;
+	font-size: 2em;
+	color: gray;
+	transition: all 0.3s;
+}
+ 
+ul li:hover a {
+	color: deepskyblue;
+	transform: scale(1.5);
+}
+ 
+.cursor {
+	position: fixed;
+	width: 0;
+	height: 0;
+	border: 15px solid gray;
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+	transition: width 0.3s, height 0.3s;
+}
+ 
+ul li:hover~.cursor {
+	width: 80px;
+	height: 80px;
+	border: 3px solid deepskyblue;
+}

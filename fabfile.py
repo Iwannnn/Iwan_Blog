@@ -2,6 +2,8 @@ from fabric import task
 from invoke import Responder
 from _credentials import github_username, github_password
 
+# pipenv run fab - H iwan@47.98.63.97: 22 - -prompt-for-login-password - p deploy
+
 
 def _get_github_auth_responders():
     """

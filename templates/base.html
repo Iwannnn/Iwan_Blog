@@ -601,6 +601,7 @@
             });
         });
     </script>
+	<script> $.ajaxSetup({ data:{csrfmiddlewaretoken:'{{ csrf_token }}'} })  </script>
     <script src="{% static 'js/csrf.js' %}"></script>
     <script>
         // 点赞功能主函数
@@ -670,6 +671,15 @@
             };
         };
     </script>
+    <!--
+    <script>
+        const cursor = document.querySelector(".cursor");
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+        })
+    </script>
+    -->
     <script src="https://cdn.bootcss.com/highlight.js/9.15.8/highlight.min.js"></script>
     <script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
     <script>

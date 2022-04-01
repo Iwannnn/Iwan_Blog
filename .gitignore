@@ -2,6 +2,8 @@ db.sqlite3
 .vscode/settings.json
 _credentials.py
 fabfile.py
-static
 media
-.pyc
+*.drawio
+*.json
+*.pyc
+blogproject\settings\common.py
